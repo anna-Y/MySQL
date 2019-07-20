@@ -1,0 +1,82 @@
+创建数据库grade
+
+CREATE DATABASE grade CHARSET=UTF8;
+
+创建表 student
+
+CREATE TABLE student;
+
+表字段     id name age hobby score comment
+
+CREATE TABLE student(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(32) NOT NULL,
+age INT NOT NULL,hobby SET('football','computer','running','basketball'),
+score FLOAT DEFAULT 0.0,
+comment TEXT);
+
+插入数据
+    age：4--16
+    score：0-100
+    hobby：football,computer,running,basketball
+
+INSERT INTO student VALUES
+(1,'Charles',15,'football,computer,running',95,'Charles is a boy'),
+(2,'Bill',8,'computer,running,basketball',85,'Bill is a boy'),
+(3,'Mark',15,'computer',75,'Mark is a boy'),
+(4,'Vincent',10,'computer,basketball',65,'Vincent is a boy'),
+(5,'William',13,'computer',55,'William is a boy'),
+(6,'Joseph',12,'football,running',45,'Joseph is a boy'),
+(7,'James',14,'football,running,basketball',35,'James is a boy'),
+(8,'Henry',5,'running',25,'Henry is a boy'),
+(9,'Gary',6,'football,running',15,'Gary is a boy'),
+(10,'Martin',8,'football,running',90,'Martin is a boy'),
+(11,'Malcolm',7,'football',95,'Malcolm is a girl'),
+(12,'Niki',13,'basketball',85,'Niki is a girl'),
+(13,'Betty',15,'football,basketball',75,'Betty is a girl'),
+(14,'Linda',14,'football,computer',65,'Linda is a girl'),
+(15,'Whitney',12,'football,computer,running,basketball',55,'Whitney is a girl'),
+(16,'Lily',4,'running,basketball',90,'Lily is a girl');
+
+查找
+    所有年龄不到10岁或者大于14岁的同学
+    SELECT * FROM student WHERE age<10 OR age>14;
+    #课堂写法
+    select * from student where age not between 10 and 14;
+    兴趣爱好中包含computer的同学
+    SELECT * FROM student WHERE hobby LIKE'%computer%';
+    #课堂写法
+    select * from student where find_in_set('computer',hobby);
+    年龄大于等于15，又喜欢足球的同学
+    SELECT * FROM student WHERE age>=15 AND hobby LIKE'%football%';
+    #课堂写法
+    select * from student where age>=15 AND find_in_set('football',hobby);
+    不及格兴趣爱好又不为空的同学
+    SELECT * FROM student WHERE score<60 AND hobby IS NOT NULL;
+    #课堂写法
+    select * from student where score<60 and hobby is not null;
+    成绩大于90分的所有同学，只看姓名和成绩
+    SELECT name,score FROM student WHERE score>90;
+    #课堂写法
+    select name,score from student where score>90;
+
+作业： 1. 熟练MySQL基本语句：
+                            创建数据库   CREATE DATABASE 库名;
+                            创建数据表   CREATE TABLE 表名;
+        插入，     insert into 表名 values();
+        查询，     select *全部字段名/(查询字段名) from 表名 where 查询条件;（查询指定部分）
+        修改，     update 表名 set 修改字段 where 修改条件;（修改指定部分）
+        删除，     delete from 表名 where 删除条件;（删除指定部分）
+        表结构修改   alter table 表名 修改动作;(add/drop/modify/change/rename)
+
+
+    2. 订单信息 ， 订单历史历史记录
+
+    创建一个数据表，存放外卖的订单信息
+    CREATE DATABASE order_form;
+    CREATE TABLE order_info;
+    INSERT INTO order_info VALUES(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ordernumber INT NOT NULL,
+    address VARCHAR(32) NOT NULL,
+    comment TEXT);
